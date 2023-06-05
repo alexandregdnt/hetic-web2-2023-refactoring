@@ -2,6 +2,7 @@ import runGoldenMaster from "jest-golden-master";
 import { Game } from ".";
 
 test("My first scenario", async () => {
+  console.log("Starting scenario testing...");
   runGoldenMaster(async () => {
     const game = new Game();
     game.add("Mathieu");

@@ -12,6 +12,7 @@ export class Game {
   private rockQuestions: Array<string> = [];
 
   constructor() {
+    console.log("Initialising new game with fresh set of questions...");
     for (let i = 0; i < 50; i++) {
       this.popQuestions.push("Pop Question " + i);
       this.scienceQuestions.push("Science Question " + i);
@@ -29,6 +30,7 @@ export class Game {
     this.places[this.howManyPlayers() - 1] = 0;
     this.purses[this.howManyPlayers() - 1] = 0;
     this.inPenaltyBox[this.howManyPlayers() - 1] = false;
+    console.log(`Player ${name} has joined the game.`);
   }
 
   private howManyPlayers(): number {
@@ -36,6 +38,7 @@ export class Game {
   }
 
   public roll(roll: number) {
+    console.log(`Player ${this.players[this.currentPlayer]} rolls a ${roll}`);
     if (this.inPenaltyBox[this.currentPlayer]) {
       if (roll % 2 != 0) {
         this.isGettingOutOfPenaltyBox = true;
@@ -60,6 +63,7 @@ export class Game {
   }
 
   private askQuestion(): void {
+    console.log(`Category is ${this.currentCategory()}.`);
     if (this.currentCategory() == "Pop") console.log(this.popQuestions.shift());
     if (this.currentCategory() == "Science") console.log(this.scienceQuestions.shift());
     if (this.currentCategory() == "Sports") console.log(this.sportsQuestions.shift());
@@ -84,6 +88,7 @@ export class Game {
   }
 
   public wrongAnswer(): boolean {
+    console.log(`Player ${this.players[this.currentPlayer]} has answered incorrectly.`);
     this.inPenaltyBox[this.currentPlayer] = true;
 
     this.currentPlayer += 1;
@@ -92,6 +97,7 @@ export class Game {
   }
 
   public wasCorrectlyAnswered(): boolean {
+    console.log(`Player ${this.players[this.currentPlayer]} has answered correctly.`);
     if (this.inPenaltyBox[this.currentPlayer]) {
       if (this.isGettingOutOfPenaltyBox) {
         this.inPenaltyBox[this.currentPlayer] = false;
